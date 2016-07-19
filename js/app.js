@@ -1,11 +1,20 @@
-$(document).ready(function() {
-	$('#userinput').submit(function(event) {
-		event.preventDefault();
-		var something = $('#inputbox').val();
-		//if user input nothing and hits enter, alert will pop up, nothing is appended
-		if (something === "") {
-			alert('Please enter an item!');
-		}
-	});
-
-		
+function addListItem() {
+	var text = $("#inputbox").val();
+	$("#todolist").append('<li><input type="checkbox" class="done"/>'+text+'<button class="delete">delete</button></li>');
+	$("#inputbox").val('');
+}
+function deleteItem() {
+	$(this).parent().remove();
+}
+function finishItem(){
+	if( $(this).parent().css('textDecoration') == 'line-through') {
+		$(this).parent().css('textDecoration','none');
+	} else {
+		$(this).parent().css('textDecoration','line-through');
+	}
+}
+$(function() {
+	$("#add").on('click', addListItem);
+	$(document).on('click','.delete',deleteItem)
+	$(document).on('click','.done',finishItem);
+});
