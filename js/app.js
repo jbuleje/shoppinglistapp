@@ -1,6 +1,6 @@
 function addListItem() {
 	var text = $("#inputbox").val();
-	$("#todolist").append('<li><input type="checkbox" class="done"/>'+text+'<button class="delete">delete</button></li>');
+	$("#todolist").append('<tr><td><input type="checkbox" class="done"/></td>'+text+'<td><button class="delete" style="border: 0; background: transparent"><img src="images/delete.png" width="20px" height="20px"></button></td></tr>');
 	$("#inputbox").val('');
 }
 function deleteItem() {
@@ -15,6 +15,13 @@ function finishItem(){
 }
 $(function() {
 	$("#add").on('click', addListItem);
-	$(document).on('click','.delete',deleteItem)
+	$(document).on('click','.delete',deleteItem);
 	$(document).on('click','.done',finishItem);
+});
+	
+$('#inputbox').keypress(function (e) {
+      if (e.which == 13) {
+          addListItem();
+          return false;
+      }
 });
